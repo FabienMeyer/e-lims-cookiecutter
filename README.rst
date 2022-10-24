@@ -1,3 +1,6 @@
+.. image:: https://codecov.io/gh/FabienMeyer/e-lims-cookiecutter/branch/main/graph/badge.svg?token=H2L1PG5S5A 
+ :target: https://codecov.io/gh/FabienMeyer/e-lims-cookiecutter
+
 ============================
 E-lims-cookiecutter template
 ============================
