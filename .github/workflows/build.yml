@@ -31,3 +31,12 @@ jobs:
       - name: Install poetry
         id: install-poetry
         run: python -m pip install poetry
+
+      - name: Configure poetry
+        id: configure-poetry
+        run: |
+          poetry config virtualenvs.create true
+          poetry config virtualenvs.in-project true
+
+      - name: Install dependencies
+        run: poetry install -E doc -E tests
