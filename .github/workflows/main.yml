@@ -41,92 +41,80 @@ jobs:
       - name: Install dependencies
         run: poetry install -E doc -E tests
 
-      - name: Upload artifact venv
-        uses: actions/upload-artifact@v2
+      - name: Poetr lock cache
+        uses: actions/cache@v2
         with:
-          name: venv
           path: .venv
+          key: ${{ runner.os }}-poetry-${{ hashFiles('**/poetry.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-poetry-
 
-  linters:
-    needs: build
-    name: ${{ matrix.os }} / ${{ matrix.python-version }}
-    runs-on: ${{ matrix.image }}
-    strategy:
-      matrix:
-        os: [Ubuntu]
-        python-version: ["3.10"]
-        include:
-          - os: Ubuntu
-            image: ubuntu-22.04
-      fail-fast: false
-    defaults:
-      run:
-        shell: bash
-    steps:
-      - name: Download artifact venv
-        uses: actions/download-artifact@v2
-        with:
-          name: venv
-          path: .venv
 
-      - name: Run black
-        run: poetry run tox -e black
+  # linters:
+  #   needs: build
+  #   name: ${{ matrix.os }} / ${{ matrix.python-version }}
+  #   runs-on: ${{ matrix.image }}
+  #   strategy:
+  #     matrix:
+  #       os: [Ubuntu]
+  #       python-version: ["3.10"]
+  #       include:
+  #         - os: Ubuntu
+  #           image: ubuntu-22.04
+  #     fail-fast: false
+  #   defaults:
+  #     run:
+  #       shell: bash
+  #   steps:
+  #     - name
 
-      - name : Run flake8 
-        run : poetry run tox -e flake8
 
-      - name : Run mypy 
-        run : poetry run tox -e mypy
+  #     - name: Run black
+  #       run: poetry run tox -e black
 
-      - name : Run doc8 
-        run : poetry run tox -e doc8
+  #     - name : Run flake8 
+  #       run : poetry run tox -e flake8
 
-  tests:
-    needs: build
-    name: ${{ matrix.os }} / ${{ matrix.python-version }}
-    runs-on: ${{ matrix.image }}
-    strategy:
-      matrix:
-        os: [Ubuntu]
-        python-version: ["3.10"]
-        include:
-          - os: Ubuntu
-            image: ubuntu-22.04
-      fail-fast: false
-    defaults:
-      run:
-        shell: bash
-    steps:
-      - name: Download artifact venv
-        uses: actions/download-artifact@v2
-        with:
-          name: venv
-          path: .venv
-      
-      - name: Run tests
-        run: poetry run tox -e py310
+  #     - name : Run mypy 
+  #       run : poetry run tox -e mypy
+
+  #     - name : Run doc8 
+  #       run : poetry run tox -e doc8
+
+  # tests:
+  #   needs: build
+  #   name: ${{ matrix.os }} / ${{ matrix.python-version }}
+  #   runs-on: ${{ matrix.image }}
+  #   strategy:
+  #     matrix:
+  #       os: [Ubuntu]
+  #       python-version: ["3.10"]
+  #       include:
+  #         - os: Ubuntu
+  #           image: ubuntu-22.04
+  #     fail-fast: false
+  #   defaults:
+  #     run:
+  #       shell: bash
+  #   steps:     
+  #     - name: Run tests
+  #       run: poetry run tox -e py310
   
-  documentation:
-    needs: build
-    name: ${{ matrix.os }} / ${{ matrix.python-version }}
-    runs-on: ${{ matrix.image }}
-    strategy:
-      matrix:
-        os: [Ubuntu]
-        python-version: ["3.10"]
-        include:
-          - os: Ubuntu
-            image: ubuntu-22.04
-      fail-fast: false
-    defaults:
-      run:
-        shell: bash
-    steps:
-      - name: Download artifact venv
-        uses: actions/download-artifact@v2
-        with:
-          name: venv
-          path: .venv
-          
-      - name: Build documentation
-        run: poetry run tox -e docs
+  # documentation:
+  #   needs: build
+  #   name: ${{ matrix.os }} / ${{ matrix.python-version }}
+  #   runs-on: ${{ matrix.image }}
+  #   strategy:
+  #     matrix:
+  #       os: [Ubuntu]
+  #       python-version: ["3.10"]
+  #       include:
+  #         - os: Ubuntu
+  #           image: ubuntu-22.04
+  #     fail-fast: false
+  #   defaults:
+  #     run:
+  #       shell: bash
+  #   steps:
+  #     - name: Build documentation
+  #       run: poetry run tox -e docs
