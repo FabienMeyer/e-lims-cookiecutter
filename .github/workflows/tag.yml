@@ -9,7 +9,7 @@ on:
 
 jobs:
   tag:
-    name: ${{ matrix.os }} / ${{ matrix.python-version }}
+    name: tag
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -51,19 +51,32 @@ jobs:
       - name: Build documentation
         run: poetry run tox -e docs
 
-      - name: Archive documentation
-        run: |
-          tar \
-            --dereference --hard-dereference \
-            --directory "docs/build/html" \
-            -cvf "$RUNNER_TEMP/documentation.tar" \
-            --exclude=.git \
-            --exclude=.github \
-            .
-
-      - name: Upload documentation artifact
-        uses: actions/upload-artifact@main
+      # - name: Setup Pages
+      #   uses: actions/configure-pages@v2
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
         with:
-          name: github-pages
-          path: ${{ runner.temp }}/documentation.tar
-          retention-days: 1
+          path: 'docs/build/html'
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1
+
+      # - name: Archive documentation
+      #   run: |
+      #     tar \
+      #       --dereference --hard-dereference \
+      #       --directory "docs/build/html" \
+      #       -cvf "$RUNNER_TEMP/documentation.tar" \
+      #       .
+
+      # - name: Upload documentation artifact
+      #   uses: actions/upload-artifact@main
+      #   with:
+      #     name: github-pages
+      #     path: ${{ runner.temp }}/documentation.tar
+      #     retention-days: 1
+
+      # - name: Upload documentation to GitHub Pages
+      #   run: |
+      #     git config --global user.name "GitHub Actions"
+      #     git config --global user.email "    
