@@ -13,7 +13,7 @@ permissions:
 
 jobs:
   tag:
-    name: tag
+    name: on_tag_job
     runs-on: ubuntu-latest
     environment:
       name: github-pages
