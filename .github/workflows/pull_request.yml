@@ -4,9 +4,6 @@ on:
   pull_request:
     branches:    
       - main
-  push:
-    branches: 
-      - '**'
 
 jobs:
   pull_request:
@@ -44,5 +41,11 @@ jobs:
       - name: Install dependencies
         run: poetry install -E doc -E tests
 
-      - name: Run tox
-        run: poetry run tox
+      - name: Run linters
+        run: poetry run tox -e linters
+          
+      - name: Run tests
+        run: poetry run tox -e py310
+
+      - name: Build documentation
+        run: poetry run tox -e docs
