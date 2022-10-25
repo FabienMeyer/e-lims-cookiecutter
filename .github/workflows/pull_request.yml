@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-    name: pull request
+    name: pull_request
     runs-on: ubuntu-latest
     defaults:
       run:
