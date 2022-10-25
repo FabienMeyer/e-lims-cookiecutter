@@ -1,5 +1,6 @@
-  
-  on:
+name: main
+
+on:
   push:
     branches: 
       - '**'
