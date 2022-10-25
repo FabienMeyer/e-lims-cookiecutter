@@ -23,8 +23,14 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+
       - name: Install poetry
-        run: pipx install poetry
+        id: install-poetry
+        run: python -m pip install poetry
 
       - name: Configure poetry
         id: configure-poetry
@@ -32,52 +38,45 @@ jobs:
           poetry config virtualenvs.create true
           poetry config virtualenvs.in-project true
 
-      - name: Setup Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v4
-        with:
-          python-version: ${{ matrix.python-version }}
-          cache: 'poetry'
-
-      # - name: Install poetry
-      #   id: install-poetry
-      #   run: python -m pip install poetry
-
       - name: Install dependencies
         run: poetry install -E doc -E tests
 
-      - name: Run tests
-        run: poetry run tox -e py310
 
-  # linters:
-  #   needs: build
-  #   name: ${{ matrix.os }} / ${{ matrix.python-version }}
-  #   runs-on: ${{ matrix.image }}
-  #   strategy:
-  #     matrix:
-  #       os: [Ubuntu]
-  #       python-version: ["3.10"]
-  #       include:
-  #         - os: Ubuntu
-  #           image: ubuntu-22.04
-  #     fail-fast: false
-  #   defaults:
-  #     run:
-  #       shell: bash
-  #   steps:
-  #     - name
+  linters:
+    needs: build
+    name: ${{ matrix.os }} / ${{ matrix.python-version }}
+    runs-on: ${{ matrix.image }}
+    strategy:
+      matrix:
+        os: [Ubuntu]
+        python-version: ["3.10"]
+        include:
+          - os: Ubuntu
+            image: ubuntu-22.04
+      fail-fast: false
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Load poetry cache
+        uses: actions/cache@v2
+        with:
+          path: .venv
+          key: ${{ runner.os }}-poetry-${{ hashFiles('**/poetry.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-poetry-
 
+      - name: Run black
+        run: poetry run tox -e black
 
-  #     - name: Run black
-  #       run: poetry run tox -e black
+      - name : Run flake8 
+        run : poetry run tox -e flake8
 
-  #     - name : Run flake8 
-  #       run : poetry run tox -e flake8
+      - name : Run mypy 
+        run : poetry run tox -e mypy
 
-  #     - name : Run mypy 
-  #       run : poetry run tox -e mypy
-
-  #     - name : Run doc8 
-  #       run : poetry run tox -e doc8
+      - name : Run doc8 
+        run : poetry run tox -e doc8
 
   # tests:
   #   needs: build
