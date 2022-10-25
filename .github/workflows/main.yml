@@ -28,6 +28,14 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
+      - uses: syphar/restore-virtualenv@v1
+        id: cache-virtualenv
+        with:
+          requirement_files: poetry.lock  # this is optional
+      
+      - uses: syphar/restore-pip-download-cache@v1
+        if: steps.cache-virtualenv.outputs.cache-hit != 'true'
+
       - name: Install poetry
         id: install-poetry
         run: python -m pip install poetry
@@ -40,6 +48,7 @@ jobs:
 
       - name: Install dependencies
         run: poetry install -E doc -E tests
+        if: steps.cache-virtualenv.outputs.cache-hit != 'true'
 
   linters:
     needs: build
@@ -57,6 +66,9 @@ jobs:
       run:
         shell: bash
     steps:
+      - uses: syphar/restore-virtualenv@v1
+        id: cache-virtualenv
+
       - name: Install dependencies
         run: poetry install -E doc -E tests
 
@@ -88,30 +100,14 @@ jobs:
       run:
         shell: bash
     steps:
-      - uses: actions/checkout@v3
-
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v4
-        with:
-          python-version: ${{ matrix.python-version }}
-
-      - name: Install poetry
-        id: install-poetry
-        run: python -m pip install poetry
-
-      - name: Configure poetry
-        id: configure-poetry
-        run: |
-          poetry config virtualenvs.create true
-          poetry config virtualenvs.in-project true
-
-      - name: Install dependencies
-        run: poetry install -E doc -E tests
-
+      - uses: syphar/restore-virtualenv@v1
+        id: cache-virtualenv
+      
       - name: Run tests
         run: poetry run tox -e py310
   
   documentation:
+    needs: build
     name: ${{ matrix.os }} / ${{ matrix.python-version }}
     runs-on: ${{ matrix.image }}
     strategy:
@@ -126,5 +122,7 @@ jobs:
       run:
         shell: bash
     steps:
+      - uses: syphar/restore-virtualenv@v1
+        id: cache-virtualenv
       - name: Build documentation
         run: poetry run tox -e docs
