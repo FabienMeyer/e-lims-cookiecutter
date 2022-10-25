@@ -10,25 +10,17 @@ on:
 jobs:
   tag:
     name: ${{ matrix.os }} / ${{ matrix.python-version }}
-    runs-on: ${{ matrix.image }}
-    strategy:
-      matrix:
-        os: [Ubuntu]
-        python-version: ["3.10"]
-        include:
-          - os: Ubuntu
-            image: ubuntu-22.04
-      fail-fast: false
+    runs-on: ubuntu-latest
     defaults:
       run:
         shell: bash
     steps:
       - uses: actions/checkout@v3
 
-      - name: Set up Python ${{ matrix.python-version }}
+      - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: ${{ matrix.python-version }}
+          python-version: '3.10'
 
       - name: Install poetry
         id: install-poetry
@@ -59,12 +51,12 @@ jobs:
       - name: Build documentation
         run: poetry run tox -e docs
 
-      - name: Archive artifacts
+      - name: Archive documentation
         run: |
           tar \
             --dereference --hard-dereference \
             --directory "docs/build/html" \
-            -cvf "$RUNNER_TEMP/artifact.tar" \
+            -cvf "$RUNNER_TEMP/documentation.tar" \
             --exclude=.git \
             --exclude=.github \
             .
@@ -73,5 +65,5 @@ jobs:
         uses: actions/upload-artifact@main
         with:
           name: github-pages
-          path: ${{ runner.temp }}/artifact.tar
+          path: ${{ runner.temp }}/documentation.tar
           retention-days: 1
