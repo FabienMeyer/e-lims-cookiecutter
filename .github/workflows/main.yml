@@ -65,6 +65,7 @@ jobs:
           key: ${{ runner.os }}-poetry-${{ hashFiles('**/poetry.lock') }}
           restore-keys: |
             ${{ runner.os }}-poetry-
+        run: poetry install -E doc -E tests
 
       - name: Run black
         run: poetry run tox -e black
