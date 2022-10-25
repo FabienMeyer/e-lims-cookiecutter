@@ -7,9 +7,8 @@ E-lims-cookiecutter template
 
 Cookiecutter template used to create Python package with Poetry ready.
 
-========
 Features
-========
+--------
 
 * Package template: Cookiecutter_ 
 * Packaging and dependency management: Poetry_
