@@ -1,15 +1,13 @@
 name: linters
 
 on:
-  push:
-    branches: 
-      - '**'
+  workflow_call:
+    inputs:
+      config-path:
+        required: true
+        type: string
 
 jobs:
-  call-workflow-2-in-local-repo:
-    uses: ./.github/workflows/build.yml
-    with:
-      config-path: .github/workflows/linters.yml
   linters:
     name: ${{ matrix.os }} / ${{ matrix.python-version }}
     runs-on: ${{ matrix.image }}

@@ -1,0 +1,17 @@
+  
+  on:
+  push:
+    branches: 
+      - '**'
+
+jobs:
+  build:
+    uses: ./.github/workflows/build.yml
+    with:
+      config-path: .github/workflows/main.yml
+
+  linters:
+    needs: build
+    uses: ./.github/workflows/linters.yml
+    with:
+      config-path: .github/workflows/main.yml
