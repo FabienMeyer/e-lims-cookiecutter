@@ -7,6 +7,11 @@ on:
     tags:        
       - 'v*'
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
   tag:
     name: tag
@@ -41,7 +46,7 @@ jobs:
       - name: Run tests
         run: poetry run tox -e py310
 
-      - name: code coverage
+      - name: Deploy to codecov
         uses: codecov/codecov-action@v2
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
