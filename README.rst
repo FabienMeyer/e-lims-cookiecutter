@@ -4,6 +4,7 @@
 ============================
 E-lims-cookiecutter template
 ============================
+|pypi| |license| |docs| |coverage| |Security Rating| |Maintainability|
 
 Cookiecutter template used to create Python package with Poetry ready.
 
@@ -30,6 +31,26 @@ Cookiecutter 2.1.1 or higher)::
 Generate a Python package project::
 
     cookiecutter https://github.com/FabienMeyer/e-lims-cookiecutter
+  
+.. |license| image:: https://img.shields.io/pypi/l/e-lims
+    :alt: License
+    :target: https://github.com/FabienMeyer/e-lims-cookiecutter/blob/main/LICENSE
+
+.. |docs| image:: https://readthedocs.org/projects/e-lims/badge/?version=latest
+    :alt: Documentation Status
+    :target: https://fabienmeyer.github.io/e-lims-cookiecutter/
+
+.. |coverage| image:: https://codecov.io/gh/FabienMeyer/e-lims-cookiecutter/branch/main/graph/badge.svg?token=H2L1PG5S5A 
+    :alt: Test coverage
+    :target: https://codecov.io/gh/FabienMeyer/e-lims-cookiecutter
+
+.. |Security Rating| image:: https://sonarcloud.io/api/project_badges/measure?project=FabienMeyer_e-lims-cookiecutter&metric=security_rating
+    :alt: Security Rating
+    :target: https://sonarcloud.io/project/overview?id=FabienMeyer_e-lims-cookiecutter
+
+.. |Maintainability| image:: https://sonarcloud.io/api/project_badges/measure?project=FabienMeyer_e-lims-cookiecutter&metric=sqale_rating
+    :alt: Maintainability
+    :target: https://sonarcloud.io/project/overview?id=FabienMeyer_e-lims-cookiecutter
 
 .. _Cookiecutter: https://github.com/cookiecutter/cookiecutter
 .. _Poetry: https://python-poetry.org/
