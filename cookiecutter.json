@@ -5,7 +5,5 @@
   "project_slug": "{{ cookiecutter.project_name.lower().replace(' ', '-').replace('_', '-') }}",
   "project_short_description": "E-lims Cookiecutter Template.",
   "version": "0.0.1",
-  "license": [
-    "MIT license"
-  ]
+  "license": "MIT"
 }
