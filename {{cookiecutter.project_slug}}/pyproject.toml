@@ -4,7 +4,9 @@ version = "0.0.1"
 description = "{{ cookiecutter.project_short_description }}"
 readme = "README.rst"
 authors = ["{{ cookiecutter.full_name }} <{{ cookiecutter.email }}>"]
+{%- if cookiecutter.license == 'MIT license' %}
 license = "MIT"
+{%- endif %}
 include = ["{{ cookiecutter.project_slug }}/py.typed"]
 
 [tool.poetry.dependencies]
