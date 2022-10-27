@@ -1,0 +1,68 @@
+# name: on_tag
+
+# on:
+#   push:
+#     branches: 
+#       - 'main'
+
+# permissions:
+#   contents: read
+#   pages: write
+#   deployments: write
+#   id-token: write
+
+# jobs:
+#   tag:
+#     name: on_tag_job
+#     runs-on: ubuntu-latest
+#     environment:
+#       name: github-pages
+#       url: ${{ steps.deployment.outputs.page_url }}
+#     defaults:
+#       run:
+#         shell: bash
+#     steps:
+#       - uses: actions/checkout@v3
+
+#       - name: Set up Python
+#         uses: actions/setup-python@v4
+#         with:
+#           python-version: '3.10'
+
+#       - name: Install poetry
+#         id: install-poetry
+#         run: python -m pip install poetry
+
+#       - name: Configure poetry
+#         id: configure-poetry
+#         run: |
+#           poetry config virtualenvs.create true
+#           poetry config virtualenvs.in-project true
+
+#       - name: Install dependencies
+#         run: poetry install -E doc -E tests
+
+#       - name: Run linters
+#         run: poetry run tox -e linters
+          
+#       - name: Run tests
+#         run: poetry run tox -e py310
+
+#       - name: Deploy to codecov
+#         uses: codecov/codecov-action@v2
+#         with:
+#           token: ${{ secrets.CODECOV_TOKEN }}
+#           files: ./coverage.xml
+#           fail_ci_if_error: true
+
+#       - name: Build documentation
+#         run: poetry run tox -e docs
+
+#       - name: Upload artifact
+#         uses: actions/upload-pages-artifact@v1
+#         with:
+#           path: 'docs/build/html'
+
+#       - name: Deploy to GitHub Pages
+#         id: deployment
+#         uses: actions/deploy-pages@v1
