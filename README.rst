@@ -1,10 +1,7 @@
-.. image:: https://codecov.io/gh/FabienMeyer/e-lims-cookiecutter/branch/main/graph/badge.svg?token=H2L1PG5S5A 
- :target: https://codecov.io/gh/FabienMeyer/e-lims-cookiecutter
-
 ============================
 E-lims-cookiecutter template
 ============================
-|pypi| |license| |docs| |coverage| |Security Rating| |Maintainability|
+|license| |docs| |coverage| |Security Rating| |Maintainability|
 
 Cookiecutter template used to create Python package with Poetry ready.
 
@@ -31,6 +28,10 @@ Cookiecutter 2.1.1 or higher)::
 Generate a Python package project::
 
     cookiecutter https://github.com/FabienMeyer/e-lims-cookiecutter
+
+.. |tag| image:: https://img.shields.io/github/v/tag/FabienMeyer/e-lims-cookiecutter
+    :alt: Tag
+    :target: https://github.com/FabienMeyer/e-lims-cookiecutter/tags
   
 .. |license| image:: https://img.shields.io/pypi/l/e-lims
     :alt: License
