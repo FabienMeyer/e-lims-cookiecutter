@@ -1,7 +1,7 @@
 ============================
 E-lims-cookiecutter template
 ============================
-|license| |docs| |coverage| |Security Rating| |Maintainability|
+|tag| |license| |docs| |coverage| |Security Rating| |Maintainability|
 
 Cookiecutter template used to create Python package with Poetry ready.
 
