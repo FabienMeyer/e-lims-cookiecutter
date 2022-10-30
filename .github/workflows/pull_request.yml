@@ -1,9 +1,9 @@
 name: on_pull_request
 
 on:
-  push:
-    branches: 
-      - 'main'
+  pull_request:
+    branches:
+      - main
 
 jobs:
   pull_request:
