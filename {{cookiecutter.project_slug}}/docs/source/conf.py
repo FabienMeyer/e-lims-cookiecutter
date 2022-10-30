@@ -25,10 +25,10 @@ master_doc = "index"
 # General information about the project.
 project = '{{ cookiecutter.project_name }}'
 package = "{{cookiecutter.project_slug}}"
-author = {{ cookiecutter.project_slug }}.__author__
+author = {{ cookiecutter.full_name }}
 copyright = '{% now 'local', '%Y' %}, {}'.format(author)
-version = {{ cookiecutter.project_slug }}.__version__
-release = {{ cookiecutter.project_slug }}.__version__
+version = {{ cookiecutter.version }}.__version__
+release = {{ cookiecutter.version }}.__version__
 language = 'en'
 exclude_patterns = []
 pygments_style = "sphinx"
