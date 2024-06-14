@@ -1,16 +1,37 @@
+  repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: check-case-conflict
+      - id: check-merge-conflict
+      - id: check-symlinks
+      - id: check-toml
+      - id: check-yaml
+      - id: debug-statements
+      - id: end-of-file-fixer
+      - id: mixed-line-ending
+        args: [ "--fix=lf" ]
+      - id: trailing-whitespace
+
 - repo: https://github.com/astral-sh/ruff-pre-commit
   # Ruff version.
   rev: v0.4.8
   hooks:
     # Run the linter.
     - id: ruff
-      args: [ check --fix docs/ hooks/ tests/]
+      args: [ check --config=pyproject.toml --fix docs/ hooks/ tests/]
     # Run the formatter.
     - id: ruff
-      args: [ format docs/ hooks/ tests/ ] 
+      args: [ format --config=pyproject.toml docs/ hooks/ tests/ ] 
 
 - repo: https://github.com/pre-commit/mirrors-mypy
   rev: ''  # Use the sha / tag you want to point at
   hooks:
   -   id: mypy
-      args: [ hooks/ tests/ ]
+      additional_dependencies: [ "typing_extensions" ]
+      args: [ "--config-file=pyproject.toml hooks/ tests/" ]
+
+- repo: https://github.com/PyCQA/bandit
+  rev: 1.7.4
+  hooks:
+    - id: bandit
