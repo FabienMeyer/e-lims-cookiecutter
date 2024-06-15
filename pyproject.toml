@@ -2,7 +2,7 @@
 name = "e-lims-cookiecutter-template"
 version = "0.0.1"
 description = "E-lims Cookiecutter Template."
-readme = "README.rst"
+readme = "README.md"
 authors = ["Fabien Meyer <fabien-meyer@outlook.com>"]
 license = "MIT"
 
@@ -35,6 +35,11 @@ safety = "^3.2.3"
 doc = ["myst-parser", "sphinx", "sphinx-autodoc-typehints", "sphinx-rtd-theme", "sphinxcontrib-mermaid"]
 tests = ["pytest", "pytest-cookies", "pytest-cov", "tox"]
 
+[tool.bandit]
+log_level = "INFO"
+severity = ["HIGH"]
+confidence = ["HIGH"]
+
 [tool.bumpversion]
 current_version = "0.0.1"
 commit = true
@@ -44,13 +49,6 @@ tag = false
 file = "pyproject.toml"
 search = 'version = "{current_version}"'
 replace = 'version = "{new_version}"'
-
-[tool.ruff]
-line-length = 120
-
-[tool.ruff.format]
-quote-style = "single"
-indent-style = "tab"
 
 [tool.mypy]
 follow_imports = "normal"
@@ -81,10 +79,12 @@ ignore_missing_imports = true
 module = "pytest_cookies"
 ignore_missing_imports = true
 
-[tool.bandit]
-log_level = "INFO"
-severity = ["HIGH"]
-confidence = ["HIGH"]
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.format]
+quote-style = "single"
+indent-style = "tab"
 
 [build-system]
 requires = []
