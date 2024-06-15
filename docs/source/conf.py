@@ -10,10 +10,14 @@ extensions = [
 	'sphinx.ext.todo',
 	'sphinx.ext.coverage',
 	'sphinx.ext.viewcode',
+	'myst_parser',
 ]
 
 templates_path = ['_templates']
-source_suffix = '.rst'
+source_suffix = {
+	'.rst': 'restructuredtext',
+	'.md': 'markdown',
+}
 master_doc = 'index'
 
 # General information about the project.
