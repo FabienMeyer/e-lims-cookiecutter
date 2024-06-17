@@ -20,7 +20,7 @@ Cookiecutter template used to create Python package with Poetry ready.
 Install the latest Cookiecutter if you haven't installed it yet (this requires Cookiecutter 2.1.1 or higher):
 
 ```bash
-pip install -U cookiecutter
+pip install cruft
 ```
 
 Generate a Python package project:

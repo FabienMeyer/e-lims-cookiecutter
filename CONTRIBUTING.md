@@ -83,7 +83,7 @@ The process described here has several goals:
 
 - Follow [PEP 8](https://pep8.org/) for Python code style.
 - Use [Ruff](https://docs.astral.sh/ruff/) for linting.
-- Use [Black](https://black.readthedocs.io/en/stable/) for code formatting.
+- Use [Ruff](https://docs.astral.sh/ruff/) forcode formatting.
 - Use [Mypy](https://mypy.readthedocs.io/en/stable/#) for type checking.
 - Write docstrings for all public methods and classes using [Google style docstrings](https://google.github.io/styleguide/pyguide.html#38-comments-and-docstrings).
 
@@ -104,7 +104,7 @@ To set up a local development environment:
 
 3. **Install the dependencies**:
     ```bash
-    poetry install -E tests -E doc
+    poetry install --with doc --no-root
     ```
 
 4. **Activate the virtual environment**:

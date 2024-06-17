@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "e-lims-cookiecutter-template"
+name = "e-lims-cookiecutter"
 version = "0.0.1"
-description = "E-lims Cookiecutter Template."
+description = "e-lims cruft template."
 readme = "README.md"
 authors = ["Fabien Meyer <fabien-meyer@outlook.com>"]
 license = "MIT"
@@ -10,16 +10,15 @@ license = "MIT"
 python = "^3.12"
 typing-extensions = "^4.12.2"
 
-pytest = {version = "^8.2.2", optional = true}
-pytest-cov = {version = "^5.0.0", optional = true}
-pytest-cookies = {version = "^0.7.0", optional = true}
-tox = {version = "^4.15.1", optional = true}
+[tool.poetry.group.doc]
+optional = true
 
-myst-parser = {version = "^3.0.1", optional = true}
-sphinx = {version = "^7.3.7", optional = true}
-sphinx-autodoc-typehints = {version = "^2.1.1", optional = true}
-sphinx-rtd-theme = {version = "^2.0.0", optional = true}
-sphinxcontrib-mermaid = {version = "^0.9.2", optional = true}
+[tool.poetry.group.doc.dependencies]
+myst-parser = "^3.0.1"
+sphinx = "^7.3.7"
+sphinx-autodoc-typehints = "^2.1.1"
+sphinx-rtd-theme = "^2.0.0"
+sphinxcontrib-mermaid = "^0.9.2"
 
 [tool.poetry.group.dev.dependencies]
 bandit = "^1.7.8"
@@ -28,17 +27,16 @@ cookiecutter = "^2.6.0"
 cruft = "^2.15.0"
 mypy = "^1.10.0"
 pre-commit = "^3.7.1"
+pytest = "^8.2.2"
+pytest-cov = "^5.0.0"
+pytest-cookies = "^0.7.0"
 ruff = "^0.4.8"
-safety = "^3.2.3"
-
-[tool.poetry.extras]
-doc = ["myst-parser", "sphinx", "sphinx-autodoc-typehints", "sphinx-rtd-theme", "sphinxcontrib-mermaid"]
-tests = ["pytest", "pytest-cookies", "pytest-cov", "tox"]
+tox = "^4.15.1"
 
 [tool.bandit]
 log_level = "INFO"
-severity = ["HIGH"]
-confidence = ["HIGH"]
+severity = ["MEDIUM"]
+confidence = ["MEDIUM"]
 
 [tool.bumpversion]
 current_version = "0.0.1"
