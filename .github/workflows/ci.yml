@@ -1,0 +1,51 @@
+---
+    name: CI
+    
+    on:  # yamllint disable-line rule:truthy
+      push:
+        branches:
+          - main  # forward-compatibility with new GitHub default branch naming
+          - master  # backward-compatibility with old GitHub default branch naming
+      pull_request:
+        branches:
+          - main  # forward-compatibility with new GitHub default branch naming
+          - master  # backward-compatibility with old GitHub default branch naming
+      workflow_dispatch:
+    
+    jobs:
+    
+      # Quality jobs ----------------------
+      code-quality:
+        strategy:
+          matrix:
+            python-version: ["3.11"]
+    
+        name: Code Quality
+        runs-on: "ubuntu-latest"
+        steps:
+          - name: Check out the repository
+            uses: actions/checkout@v3.0.2
+    
+          - name: Set up Python
+            uses: actions/setup-python@v4.2.0
+            with:
+              python-version: {{ "${{ matrix.python-version }}" }}
+    
+          - name: Install Poetry
+            run: |
+              pip install poetry
+              poetry --version
+    
+          - name: Configure Poetry
+            run: |
+              poetry config cache-dir "${GITHUB_WORKSPACE}/.cache/pypoetry"
+              poetry config virtualenvs.in-project true
+              poetry config --list
+              poetry install --no-root
+    
+          - name: Load cached tox testenv(s) (if they exist)
+            id: cached-poetry-dependencies
+            uses: actions/cache@v3.0.1
+            run: |
+                poetry run -e quality
+    
