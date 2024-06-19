@@ -7,9 +7,11 @@
 ![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=FabienMeyer_e-lims-cookiecutter&metric=security_rating) 
 ![Maintainability](https://sonarcloud.io/api/project_badges/measure?project=FabienMeyer_e-lims-cookiecutter&metric=sqale_rating)
 
+## Features
+
 Cruft template used to create Python package.
 
-## Features
+## Development tools 
 
 * Package template: [Cruft](https://cruft.github.io/cruft/)
 * Packaging and dependency management: [Poetry](https://python-poetry.org/)
