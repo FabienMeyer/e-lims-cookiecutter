@@ -2,5 +2,4 @@
 
 
 def test_pre_hook() -> None:
-	"""Test pre hook."""
-	pass
+    """Test pre hook."""

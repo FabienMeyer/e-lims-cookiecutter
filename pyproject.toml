@@ -21,7 +21,6 @@ sphinx-rtd-theme = "^2.0.0"
 sphinxcontrib-mermaid = "^0.9.2"
 
 [tool.poetry.group.dev.dependencies]
-bandit = "^1.7.8"
 bump2version = "^1.0.1"
 cookiecutter = "^2.6.0"
 cruft = "^2.15.0"
@@ -32,11 +31,6 @@ pytest-cov = "^5.0.0"
 pytest-cookies = "^0.7.0"
 ruff = "^0.4.8"
 tox = "^4.15.1"
-
-[tool.bandit]
-log_level = "INFO"
-severity = ["MEDIUM"]
-confidence = ["MEDIUM"]
 
 [tool.bumpversion]
 current_version = "0.0.1"
@@ -80,9 +74,13 @@ ignore_missing_imports = true
 [tool.ruff]
 line-length = 120
 
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = ["D211", "D213", "Q000", "Q003", "COM812", "ISC001"]
+
 [tool.ruff.format]
 quote-style = "single"
-indent-style = "tab"
+indent-style = "space"
 
 [build-system]
 requires = []

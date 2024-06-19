@@ -2,5 +2,4 @@
 
 
 def test_post_hook() -> None:
-	"""Test post hook."""
-	pass
+    """Test post hook."""
