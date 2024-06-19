@@ -43,12 +43,6 @@
               poetry config --list
               poetry install --no-root
     
-          - name: Load cached tox testenv(s) (if they exist)
-            id: cached-poetry-dependencies
-            uses: actions/cache@v3.0.1
-            with:
-              key: tox-{{ "${{ github.workflow }}" }}-{{ "${{ github.job }}" }}-{{ "${{ runner.os }}" }}-CPython{{ "${{ matrix.python-version }}" }}-{{ "${{ hashFiles('**/poetry.lock') }}" }}
-    
           - name: Run static analysis
             run: |
-              poetry run -e quality
+              poetry run tox -e quality
