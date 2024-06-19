@@ -12,8 +12,6 @@ assignees: ''
 
 ## Steps to Reproduce
 <!-- Steps to reproduce the behavior. -->
-1. Go to '...'
-4. See error
 
 ## Expected Behavior
 <!-- A clear and concise description of what you expected to happen. -->
@@ -32,7 +30,7 @@ assignees: ''
 | Operating System  | [e.g. Windows, macOS, Linux] |
 | Python Version    | [e.g. 3.8.10] |
 | Package Version   | [e.g. 1.0.0] |
-| Other relevant information | [e.g. Browser version, specific libraries] |
+| Other relevant information | [e.g. specific libraries] |
 
 ## Additional Context
 <!-- Add any other context about the problem here. -->
