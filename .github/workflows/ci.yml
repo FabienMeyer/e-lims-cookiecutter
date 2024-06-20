@@ -38,10 +38,6 @@ jobs:
           poetry run tox -e py312
 
   code-quality:
-    strategy:
-      matrix:
-        python-version: ["3.12"]
-
     name: Code Quality
     runs-on: "ubuntu-latest"
     steps:
@@ -51,7 +47,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: ${{ matrix.python-version }}
+          python-version: "3.12"
 
       - name: Poetry install and configure
         run: |
@@ -73,10 +69,6 @@ jobs:
           poetry run tox -e typer
 
   documentation:
-    strategy:
-      matrix:
-        python-version: ["3.12"]
-
     name: Documentation
     runs-on: "ubuntu-latest"
     steps:
@@ -86,7 +78,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: ${{ matrix.python-version }}
+          python-version: "3.12"
 
       - name: Poetry install and configure
         run: |
@@ -98,3 +90,41 @@ jobs:
       - name: Run documentation
         run: |
           poetry run tox -e documentation
+      
+  deploy-documentation:
+    name: Deploy documentation
+    needs: [tests, code-quality, documentation]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Poetry
+        run: pip install poetry
+
+      - name: Configure Poetry and install dependencies
+        run: |
+          poetry config cache-dir "${GITHUB_WORKSPACE}/.cache/pypoetry"
+          poetry config virtualenvs.in-project true
+          poetry install --no-root
+
+      - name: Build documentation
+        run: poetry run tox -e documentation
+
+      - name: Deploy to GitHub Pages
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config --global user.name "${{ github.actor }}"
+          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
+          git checkout --orphan gh-pages
+          git reset --hard
+          cp -r path_to_documentation_output/* .
+          git add .
+          git commit -m "Deploy to GitHub Pages"
+          git push --force --set-upstream origin gh-pages
