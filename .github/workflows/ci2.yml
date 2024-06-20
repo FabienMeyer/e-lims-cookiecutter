@@ -1,0 +1,79 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    outputs:
+      cache-directory: ${{ steps.poetry-setup.outputs.cache-directory }}
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.12
+
+      - name: Install Poetry
+        run: pip install poetry
+
+      - name: Configure Poetry
+        id: poetry-setup
+        run: |
+          poetry config cache-dir "${GITHUB_WORKSPACE}/.cache/pypoetry"
+          poetry config virtualenvs.in-project true
+          echo "cache-directory=${GITHUB_WORKSPACE}/.cache/pypoetry" >> $GITHUB_ENV
+          poetry install --no-root
+
+  tests:
+    needs: setup
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Use cache directory
+        run: echo "Using cache directory: ${{ needs.setup.outputs.cache-directory }}"
+
+      - name: Run tests
+        run: poetry run tox -e py312
+
+  code-quality:
+    needs: setup
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Use cache directory
+        run: echo "Using cache directory: ${{ needs.setup.outputs.cache-directory }}"
+
+      - name: Run formatter
+        run: poetry run tox -e formatter
+
+      - name: Run linter
+        run: poetry run tox -e linter
+
+      - name: Run typer
+        run: poetry run tox -e typer
+
+  documentation:
+    needs: setup
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Use cache directory
+        run: echo "Using cache directory: ${{ needs.setup.outputs.cache-directory }}"
+
+      - name: Run documentation
+        run: poetry run tox -e documentation
