@@ -9,6 +9,33 @@ on:
       - main
     
 jobs:
+  tests:
+    strategy:
+      matrix:
+        python-version: ["3.12"]
+
+    name: Tests
+    runs-on: "ubuntu-latest"
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Poetry install and configure
+        run: |
+          pip install poetry
+          poetry config cache-dir "${GITHUB_WORKSPACE}/.cache/pypoetry"
+          poetry config virtualenvs.in-project true
+          poetry install --no-root
+
+      - name: Run tests
+        run: |
+          poetry run tox -e py312
+
   code-quality:
     strategy:
       matrix:
