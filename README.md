@@ -32,5 +32,5 @@ pip install cruft
 
 Generate a Python package project:
 ```bash
-cruft https://github.com/FabienMeyer/e-lims-cruft
+cruft create https://github.com/FabienMeyer/e-lims-cruft
 ```
