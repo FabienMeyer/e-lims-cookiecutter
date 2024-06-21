@@ -1,11 +1,10 @@
 """{{ cookiecutter.project_name }} main."""
 
 
-def hello(name):
-    # type: (str) -> str
+def hello(name: str) -> str:
     """Say hello.
 
     >>> hello('{{ cookiecutter.project_name }}')
     'Hello {{ cookiecutter.project_name }}!'
     """
-    return "Hello {}!".format(name)
+    return f"Hello {name}!"

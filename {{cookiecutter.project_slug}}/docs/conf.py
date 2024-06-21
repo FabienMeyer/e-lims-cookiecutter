@@ -9,34 +9,35 @@ import {{ cookiecutter.project_slug }}
 
 # -- General configuration ---------------------------------------------
 extensions = [
-    "sphinx.ext.autodoc",
-    "sphinx_autodoc_typehints",
-    "sphinx.ext.doctest",
-    "sphinx.ext.intersphinx",
-    "sphinx.ext.todo",
-    "sphinx.ext.coverage",
-    "sphinx.ext.viewcode",
+	'sphinx.ext.autodoc',
+	'sphinx_autodoc_typehints',
+	'sphinx.ext.doctest',
+	'sphinx.ext.intersphinx',
+	'sphinx.ext.todo',
+	'sphinx.ext.coverage',
+	'sphinx.ext.viewcode',
+	'myst_parser',
 ]
 
-templates_path = ["_templates"]
-source_suffix = ".rst"
-master_doc = "index"
+templates_path = ['_templates']
+source_suffix = '.rst'
+master_doc = 'index'
 
 # General information about the project.
 project = '{{ cookiecutter.project_name }}'
-package = "{{cookiecutter.project_slug}}"
-author = {{ cookiecutter.full_name }}
+package = '{{cookiecutter.project_slug}}'
+author = '{{ cookiecutter.full_name }}'
 copyright = '{% now 'local', '%Y' %}, {}'.format(author)
-version = {{ cookiecutter.version }}.__version__
-release = {{ cookiecutter.version }}.__version__
+version = '{{ cookiecutter.version }}'
+release = '{ cookiecutter.version }}'
 language = 'en'
 exclude_patterns = []
-pygments_style = "sphinx"
+pygments_style = 'sphinx'
 todo_include_todos = True
 
 
 # -- Options for HTML output -------------------------------------------
-html_theme = "sphinx_rtd_theme"
+html_theme = 'sphinx_rtd_theme'
 
 # -- Options for HTMLHelp output ---------------------------------------
 htmlhelp_basename = '{{ cookiecutter.project_slug }}doc'
@@ -68,6 +69,6 @@ texinfo_documents = [
      'Miscellaneous'),
 ]
 
-intersphinx_mapping = {"python": ("https://docs.python.org/3/", None)}
+intersphinx_mapping = {'python': ('https://docs.python.org/3/', None)}
 set_type_checking_flag = True
 always_document_param_types = True
