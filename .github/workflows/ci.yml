@@ -7,6 +7,16 @@ on:
   pull_request:
     branches:
       - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
     
 jobs:
   tests:
@@ -94,6 +104,9 @@ jobs:
   deploy-documentation:
     name: Deploy documentation
     needs: [tests, code-quality, documentation]
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repository
@@ -104,6 +117,9 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+        
       - name: Install Poetry
         run: pip install poetry
 
@@ -116,15 +132,10 @@ jobs:
       - name: Build documentation
         run: poetry run tox -e documentation
 
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: 'docs/build/html/'
       - name: Deploy to GitHub Pages
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          git config --global user.name "${{ github.actor }}"
-          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
-          git checkout --orphan gh-pages
-          git reset --hard
-          cp -r docs/build/html* .
-          git add .
-          git commit -m "Deploy to GitHub Pages"
-          git push --force --set-upstream origin gh-pages
+        id: deployment
+        uses: actions/deploy-pages@v4
