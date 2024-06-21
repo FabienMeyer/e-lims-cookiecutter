@@ -2,7 +2,7 @@
   "full_name": "Fabien Meyer",
   "email": "fabien-meyer@outlook.com",
   "project_name": "e-lims-cookiecutter-template",
-  "project_slug": "{{ cookiecutter.project_name.lower().replace(' ', '_').replace('-', '_') }}",
+  "project_slug": "{{ cookiecutter.project_name.lower().replace(' ', '-').replace('_', '-') }}",
   "project_short_description": "E-lims Cookiecutter Template.",
   "version": "0.0.1",
   "license": [
