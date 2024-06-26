@@ -6,7 +6,7 @@ readme = "README.md"
 authors = ["{{ cookiecutter.full_name }} <{{ cookiecutter.email }}>"]
 {%- if cookiecutter.license == 'MIT license' %}
 license = "MIT"
-{%- endif %}
+{%- endif %}785542514
 include = ["{{ cookiecutter.project_slug }}/py.typed"]
 
 [tool.poetry.dependencies]
@@ -24,7 +24,7 @@ sphinx-rtd-theme = "^2.0.0"
 sphinxcontrib-mermaid = "^0.9.2"
 
 [tool.poetry.group.dev.dependencies]
-bump2version = "^1.0.1"
+bump-my-version = "^0.23.0"
 cookiecutter = "^2.6.0"
 cruft = "^2.15.0"
 mypy = "^1.10.0"
