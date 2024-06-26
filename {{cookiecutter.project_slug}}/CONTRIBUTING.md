@@ -28,7 +28,7 @@ This project and everyone participating in it is governed by the [Code of Conduc
 
 This section guides you through submitting a bug report. Following these guidelines helps maintainers and the community understand your report, reproduce the behavior, and find related reports.
 
-- **Before submitting** a bug report, please check the [existing issues](https://github.com/FabienMeyer/"{{ cookiecutter.project_slug }}"/issues) to see if the issue has already been reported.
+- **Before submitting** a bug report, please check the [existing issues]("{{ cookiecutter.project_git_repository }}"/issues) to see if the issue has already been reported.
 - If you find a **Closed** issue that seems like it is the same thing that you are experiencing, include a link to the original issue in your bug report.
 
 #### How Do I Submit A Bug Report?
@@ -93,8 +93,8 @@ To set up a local development environment:
 
 1. **Clone the repository**:
     ```bash
-    git clone https://github.com/FabienMeyer/"{{ cookiecutter.project_slug }}".git
-    cd e-lims-cookiecutter
+    git clone "{{ cookiecutter.project_git_repository }}".git
+    cd "{{ cookiecutter.project_name }}"   
     ```
 
 2. **Install Poetry** (if not already installed):

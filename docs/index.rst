@@ -7,6 +7,10 @@ Welcome to E-lims Cookiecutter Template!
    :caption: Contents:
 
    readme
+   changelog 
+   contributing
+   code_of_conduct 
+   license
 
 Indices and tables
 ==================

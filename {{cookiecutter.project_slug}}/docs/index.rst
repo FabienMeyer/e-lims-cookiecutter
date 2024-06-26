@@ -8,6 +8,9 @@
    :caption: Contents:
 
    readme
+   changelog 
+   contributing
+   code_of_conduct
 
 Indices and tables
 ==================
